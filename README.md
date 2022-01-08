@@ -1,6 +1,6 @@
 # Robosys_kadai2
 
-#ロボットシステム学2021年度課題1
+# ロボットシステム学2021年度課題1
 
 このプログラムは上田隆一先生が担当する2021年ロボットシステム学の課題2で作成したものである. 
 
@@ -9,9 +9,11 @@
 
 
 
+
 ## ●プログラムの概要
 
 Rasberry Pi 4を用いて, rospy.Publisher(count.py)から現在の日付時間とマイクロ秒をrospy.Subscriber(twice.py)にトピックとして送り, 画面上に10Hz毎に日付時間マイクロ秒と前回の値との差分を表示するプログラムである.
+
 
 
 
@@ -31,6 +33,7 @@ Rasberry Pi 4を用いて, rospy.Publisher(count.py)から現在の日付時間�
 
 
 
+
 ## ●使用したもの
 
 
@@ -42,13 +45,14 @@ Rasberry Pi 4を用いて, rospy.Publisher(count.py)から現在の日付時間�
 
 
 
+
 ## ●使用方法
 
 
 
-###【ワークスペースの準備】
+### 【ワークスペースの準備】
 
-・ディレクトリを作成する
+####  ・ディレクトリを作成する
 
 $ cd
 
@@ -60,13 +64,15 @@ $ catkin_init_workspace
 
 
 
-・.bashrcの下から3行目に以下を記述する
+
+####  ・.bashrcの下から3行目に以下を記述する
 
 source ~/catkin_ws/devel/setup.bash
 
 
 
-・環境をビルドする
+
+####  ・環境をビルドする
 
 $ cd ~/catkin_ws
 
@@ -78,14 +84,16 @@ $ source ~/.bashrc
 
 
 
-###【パッケージの作成とインストール】
 
-・作成するパッケージ名と使用するライブラリを指定する
+
+### 【パッケージの作成とインストール】
+
+####  ・作成するパッケージ名と使用するライブラリを指定する
 
 $ cd ~/catkin_ws/src
 
 
-・インストール
+####  ・インストール
 
 $ git clone https://github.com/yuikadomura/Robosys_kadai2.git 
 
@@ -97,7 +105,9 @@ $ catkin_make
 
 
 
-###【実行】
+
+
+### 【実行】
 
 
 $ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/count.py
@@ -107,7 +117,9 @@ $ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/twice.py
 
 
 
-・以下の3つのコマンドはそれぞれ別のubuntuで実行する
+
+
+####  ・以下の3つのコマンドはそれぞれ別のubuntuで実行する
 
 
 $ roscore
@@ -120,16 +132,20 @@ $ rosrun mypkg twice.py
 
 
 
-###【終了】
+
+
+### 【終了】
 
 
 ※実行していたものはctrl+Cで停止
 
 
-・Rasberry Pi4の停止
+####  ・Rasberry Pi4の停止
 
 
 $ sudo poweroff
+
+
 
 
 
@@ -147,7 +163,7 @@ Robosys_kadai2は[こちらのライセンス](https://www.gnu.org/licenses/)に
 
 
 
-##●参考
+## ●参考
 
 
 [1] [第10回講義動画](https://youtu.be/PL85Pw_zQH0)
