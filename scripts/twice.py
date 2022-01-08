@@ -19,5 +19,6 @@ if __name__ == '__main__':
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         date_time = datetime.datetime.fromtimestamp(n)
+        print(n,':', date_time)
         pub.publish(n)
         rate.sleep()

@@ -13,5 +13,6 @@ n = 0.0
 
 while not rospy.is_shutdown():
     n = time.time()
+    print(type(time.time()),':',n)
     pub.publish(n)
     rate.sleep()
