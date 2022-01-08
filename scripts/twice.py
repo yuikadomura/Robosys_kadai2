@@ -4,8 +4,9 @@
 #!/usr/bin/env python3
 import rospy
 from std_msgs.msg import Int64
+import time
 
-n = 0
+n = 0.0
 
 def cb(message):
     global n
@@ -17,6 +18,6 @@ if __name__ == '__main__':
     pub = rospy.Publisher('twice', Int64, queue_size=1) 
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
-        print(n)
+        date_time = datetime.datetime.fromtimestamp(n)
         pub.publish(n)
         rate.sleep()
