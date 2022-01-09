@@ -19,6 +19,7 @@ Publisher側で取得したUNIX timeをSubscriberに送信するプログラム.
 
 ### ●rospy.Publisher(getUnix.py)
 
+
 UNIX timeを取得してrospy.Subscriber(diffTime.py)にトピックとして配信する.
 
 
@@ -30,9 +31,12 @@ diffTime.pyは以下の処理を行う.
 
 1:受信したUNIX timeに対してdatetimeを使用し, 年月日時分秒ミリ秒に変換する.
 
+
 2:今回受信したUNIX timeと前回受信したUNIX timeの差分を計算する.
 
+
 3:受信したUNIX timeと1のdatetimeで変換した文字列, 2で計算した差分を結合した文字列を作成.
+
 
 4:3で作製した文字列をトピックとして配信する.
 
@@ -42,6 +46,7 @@ diffTime.pyは以下の処理を行う.
 
 rateをそれぞれ10Hz, 100Hz, 1000Hzにして差分を比較する. 
 
+
 ### 結果
 
 　【rate】　　     【差分】
@@ -50,7 +55,9 @@ rateをそれぞれ10Hz, 100Hz, 1000Hzにして差分を比較する.
 
   　100Hz　　    1/100秒(0.01秒)
 　
+
   　1000Hz　　   1/1000秒(0.001秒)
+
 
 rateを10倍にすると, 差分は1/10になった.
 
@@ -159,13 +166,13 @@ $ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/diffTime.py
 $ roscore
 
 
-$ rosrun mypkg getUnix.py
+$ rosrun Robosys_kadai2 getUnix.py
 
 
-$ rosrun mypkg diffTime.py
+$ rosrun Robosys_kadai2 diffTime.py
 
 
-$ rostopic echo /twice
+$ rostopic echo /diffTime
 
 
 
@@ -187,7 +194,7 @@ $ sudo poweroff
 
 ## ●実行時の動画
 
-Youtubeのリンクは[こちら]()
+Youtubeのリンクは[こちら](https://youtube.be/i-vofWl-RCI)
 
 
 
