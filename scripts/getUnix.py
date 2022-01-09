@@ -3,16 +3,16 @@
 
 #!/usr/bin/env python3
 import rospy
-from std_msgs.msg import Int64
+from std_msgs.msg import Float64
 import time
 
-rospy.init_node('count')
-pub = rospy.Publisher('count_up', Int64, queue_size=1)
+rospy.init_node('getUnix')
+pub = rospy.Publisher('get_Unix', Float64, queue_size=1)
 rate = rospy.Rate(10)
 n = 0.0
 
 while not rospy.is_shutdown():
     n = time.time()
-    print(type(time.time()),':',n)
-    pub.publish(n)
+    print(type(time.time()),':',t)
+    pub.publish(t)
     rate.sleep()

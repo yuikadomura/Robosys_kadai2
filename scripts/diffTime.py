@@ -3,22 +3,31 @@
 
 #!/usr/bin/env python3
 import rospy
-from std_msgs.msg import Int64
-import time
+from std_msgs.msg import Float64, String
+from datetime import datetime, timedelta, timezone
 
-n = 0.0
+t = 0.0
+JST = timezone(timedelta(hours =+ 9),'JST')
+pre_tm = 0.0
+def_time = 0.0
 
 def cb(message):
-    global n
-    n = message.data
+    global t
+    t = message.data
 
 if __name__ == '__main__':
-    rospy.init_node('twice')
-    sub = rospy.Subscriber('count_up', Int64, cb)
-    pub = rospy.Publisher('twice', Int64, queue_size=1) 
+    rospy.init_node('diffTime')
+    sub = rospy.Subscriber('get_Unix', Float64, cb)
+    pub = rospy.Publisher('diffTime', String, queue_size=1) 
     rate = rospy.Rate(10)
+
     while not rospy.is_shutdown():
-        date_time = datetime.datetime.fromtimestamp(n)
-        print(n,':', date_time)
-        pub.publish(n)
+        date_time = datetime.fromtimestamp(t, JST)
+        def_tm = t - pre_tm
+        pre_tm = t
+        def_str = '{:0.5f}'.format(def_tm)
+        dt_str = date_time.strftime("%Y/%m/%d/ %H:%M:%S.%f")
+        res_str = '[UNIX Time:' + str(t) + '] [Date Time:' + str(dt_str) + '] [Diff Time:' + str(def_str) + ']'
+        print(res_str)
+        pub.publish(res_str)
         rate.sleep()
