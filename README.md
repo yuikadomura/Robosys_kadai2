@@ -12,9 +12,47 @@
 
 ## ●プログラムの概要
 
-Rasberry Pi 4を用いて, rospy.Publisher(count.py)から現在の日付時間とマイクロ秒をrospy.Subscriber(twice.py)にトピックとして送り, 画面上に10Hz毎に日付時間マイクロ秒と前回の値との差分を表示するプログラムである.
+Publisher側で取得したUNIX timeをSubscriberに送信するプログラム.
+
+配信と受信の際のrate( 周波数 )を変更して, 受信したUNIX timeと1つ前で受信したUNIX timeの差分を比較するために作成した.
 
 
+### ●rospy.Publisher(getUnix.py)
+
+UNIX timeを取得してrospy.Subscriber(diffTime.py)にトピックとして配信する.
+
+
+### ●rospy.Subscriber(diffTime.py)
+
+
+diffTime.pyは以下の処理を行う.
+
+
+1:受信したUNIX timeに対してdatetimeを使用し, 年月日時分秒ミリ秒に変換する.
+
+2:今回受信したUNIX timeと前回受信したUNIX timeの差分を計算する.
+
+3:受信したUNIX timeと1のdatetimeで変換した文字列, 2で計算した差分を結合した文字列を作成.
+
+4:3で作製した文字列をトピックとして配信する.
+
+
+
+## ●考察
+
+rateをそれぞれ10Hz, 100Hz, 1000Hzにして差分を比較する. 
+
+### 結果
+
+　【rate】　　     【差分】
+
+  　10Hz　　     1/10秒(0.1秒)
+
+  　100Hz　　    1/100秒(0.01秒)
+　
+  　1000Hz　　   1/1000秒(0.001秒)
+
+rateを10倍にすると, 差分は1/10になった.
 
 
 ## ●動作環境
@@ -28,8 +66,7 @@ Rasberry Pi 4を用いて, rospy.Publisher(count.py)から現在の日付時間�
 ・使用言語 : python3
 
 
-・ROS noetic
-
+・ROS1
 
 
 
@@ -38,9 +75,6 @@ Rasberry Pi 4を用いて, rospy.Publisher(count.py)から現在の日付時間�
 
 
 ・Rasberry Pi 4
-
-
-・ノートパソコン
 
 
 
@@ -110,10 +144,10 @@ $ catkin_make
 ### 【実行】
 
 
-$ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/count.py
+$ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/getUnix.py
 
 
-$ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/twice.py
+$ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/diffTime.py
 
 
 
@@ -125,12 +159,13 @@ $ chmod +x ~/catkin_ws/src/Robosys_kadai2/scripts/twice.py
 $ roscore
 
 
-$ rosrun mypkg count.py
+$ rosrun mypkg getUnix.py
 
 
-$ rosrun mypkg twice.py
+$ rosrun mypkg diffTime.py
 
 
+$ rostopic echo /twice
 
 
 
